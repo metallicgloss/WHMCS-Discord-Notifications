@@ -29,7 +29,7 @@
 			'username' => $companyName,
 			'embeds' => array(
 				array(
-					'url' => $whmcsAdminURL . 'orders.php?action=view&id=' . $vars['invoiceid'],
+					'url' => $whmcsAdminURL . 'invoices.php?action=view&id=' . $vars['invoiceid'],
 					'timestamp' => date(DateTime::ISO8601),
 					'description' => '',
 					'color' => '5653183',
@@ -50,7 +50,7 @@
 			'username' => $companyName,
 			'embeds' => array(
 				array(
-					'url' => $whmcsAdminURL . 'orders.php?action=view&id=' . $vars['invoiceid'],
+					'url' => $whmcsAdminURL . 'invoices.php?action=view&id=' . $vars['invoiceid'],
 					'timestamp' => date(DateTime::ISO8601),
 					'description' => '',
 					'color' => '5653183',
