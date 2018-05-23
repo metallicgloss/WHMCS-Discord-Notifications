@@ -1,6 +1,6 @@
 <?php
-
 //////// Configuration Information ////////
+
 $GLOBALS['discordWebHookURL'] = "";
 // Your Discord WebHook URL. Please be aware that the channel which you select to create the web hook is the channel which will be used for sending messages.
 
@@ -10,15 +10,12 @@ $GLOBALS['whmcsAdminURL'] = "";
 $GLOBALS['companyName'] = "";
 // Your Company Name. This will be the name of the user which sends the messages.
 
-// $discordGroupID = "";
-// Found on line(s): 21, 38, 57, 76, 112, 131, 182, 201, 238
+$GLOBALS['discordGroupID'] = "";
 // Discord Group ID Config Option. If you wished for each message which is sent to ping a specific group, please place the ID here. An example of a group ID is: @&343029528563548162
 
-
 add_hook('InvoicePaid', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -35,9 +32,8 @@ add_hook('InvoicePaid', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('InvoiceRefunded', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -54,9 +50,8 @@ add_hook('InvoiceRefunded', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('AcceptOrder', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -73,9 +68,8 @@ add_hook('AcceptOrder', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('CancellationRequest', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -109,9 +103,8 @@ add_hook('CancellationRequest', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('FraudOrder', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -127,10 +120,9 @@ add_hook('FraudOrder', 1, function($vars)	{
     );
     processNotification($dataPacket);
 });
-add_hook('NetworkIssueAdd', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
+add_hook('NetworkIssueAdd', 1, function($vars) {
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -163,11 +155,6 @@ add_hook('NetworkIssueAdd', 1, function($vars)	{
                         'inline' => true
                     ),
                     array(
-                        'name' => 'Affecting',
-                        'value' => $vars['affecting'],
-                        'inline' => true
-                    ),
-                    array(
                         'name' => 'Priority',
                         'value' => $vars['priority'],
                         'inline' => true
@@ -179,9 +166,8 @@ add_hook('NetworkIssueAdd', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('PendingOrder', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -198,9 +184,8 @@ add_hook('PendingOrder', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('TicketOpen', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
@@ -235,9 +220,8 @@ add_hook('TicketOpen', 1, function($vars)	{
     processNotification($dataPacket);
 });
 add_hook('TicketUserReply', 1, function($vars)	{
-    $discordGroupID = ""; // Discord Group ID Config Option.
     $dataPacket     = array(
-        'content' => $discordGroupID,
+        'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
         'embeds' => array(
             array(
