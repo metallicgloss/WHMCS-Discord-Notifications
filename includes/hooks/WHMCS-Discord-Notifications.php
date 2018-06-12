@@ -255,7 +255,7 @@ add_hook('TicketUserReply', 1, function($vars)	{
     );
     processNotification($dataPacket);
 });
-function processNotification($dataPacket, $discordWebHookURL)	{
+function processNotification($dataPacket)	{
     $dataString        = json_encode($dataPacket);
     $curl              = curl_init();
     curl_setopt($curl, CURLOPT_URL, $GLOBALS['discordWebHookURL']);
