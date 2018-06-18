@@ -11,7 +11,7 @@ $GLOBALS['companyName'] = "";
 // Your Company Name. This will be the name of the user which sends the messages.
 
 $GLOBALS['discordGroupID'] = "";
-// Discord Group ID Config Option. If you wished for each message which is sent to ping a specific group, please place the ID here. An example of a group ID is: @&343029528563548162
+// Discord Group ID Config Option. If you wished for each message which is sent to ping a specific group, please place the ID here. An example of a group ID is: <@&343029528563548162>
 
 $GLOBALS['discordWebHookAvatar'] = "";
 // (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png).
