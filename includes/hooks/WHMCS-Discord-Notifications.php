@@ -13,10 +13,14 @@ $GLOBALS['companyName'] = "";
 $GLOBALS['discordGroupID'] = "";
 // Discord Group ID Config Option. If you wished for each message which is sent to ping a specific group, please place the ID here. An example of a group ID is: @&343029528563548162
 
+$GLOBALS['discordWebHookAvatar'] = "";
+// (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png).
+
 add_hook('InvoicePaid', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
@@ -35,6 +39,7 @@ add_hook('InvoiceRefunded', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
@@ -53,6 +58,7 @@ add_hook('AcceptOrder', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
@@ -71,6 +77,7 @@ add_hook('CancellationRequest', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'cancelrequests.php',
@@ -106,6 +113,7 @@ add_hook('FraudOrder', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
@@ -124,6 +132,7 @@ add_hook('NetworkIssueAdd', 1, function($vars) {
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'networkissues.php?action=manage&id=' . $vars['announcementid'],
@@ -169,6 +178,7 @@ add_hook('PendingOrder', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
@@ -187,6 +197,7 @@ add_hook('TicketOpen', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'title' => $vars['subject'],
@@ -223,6 +234,7 @@ add_hook('TicketUserReply', 1, function($vars)	{
     $dataPacket     = array(
         'content' => $GLOBALS['discordGroupID'],
         'username' => $GLOBALS['companyName'],
+        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
         'embeds' => array(
             array(
                 'title' => $vars['subject'],
