@@ -18,269 +18,14 @@ $GLOBALS['companyName'] = "";
 
 // Discord Message Color
 $GLOBALS['discordColor'] = hexdec("");
-// Note: The color code format within this script is standard hex. Exclude the beginning # character if one is present - an example would be "5642BF"
+// Note: The color code format within this script is standard hex. Exclude the beginning # character if one is present.
 
 // Discord Group ID Notification
 $GLOBALS['discordGroupID'] = "";
-<<<<<<< HEAD
-// Discord Group ID Config Option. If you wished for each message which is sent to ping a specific group, please place the ID here. An example of a group ID is: <@&343029528563548162>
+// Note: If you'd like to have a specific group pinged on each message, please place the ID here. An example of a group ID is: <@&343029528563548162>
 
 $GLOBALS['discordWebHookAvatar'] = "";
 // (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png).
-
-add_hook('InvoicePaid', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'Invoice Payment Received'
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('InvoiceRefunded', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'Invoice Refunded'
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('AcceptOrder', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Accepted Order'
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('CancellationRequest', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'cancelrequests.php',
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => $vars['reason'],
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Cancellation Request'
-                ),
-                'fields' => array(
-                    array(
-                        'name' => 'Product ID',
-                        'value' => $vars['relid'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Cancellation Type',
-                        'value' => $vars['type'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'User ID',
-                        'value' => $vars['userid'],
-                        'inline' => true
-                    )
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('FraudOrder', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'Order Marked As Fraud'
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('NetworkIssueAdd', 1, function($vars) {
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'networkissues.php?action=manage&id=' . $vars['announcementid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => $vars['reason'],
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Network Issue'
-                ),
-                'fields' => array(
-                    array(
-                        'name' => 'Start Date',
-                        'value' => $vars['startdate'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'End Date',
-                        'value' => $vars['enddate'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Title',
-                        'value' => $vars['title'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Description',
-                        'value' => $vars['description'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Priority',
-                        'value' => $vars['priority'],
-                        'inline' => true
-                    )
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('PendingOrder', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Pending Order'
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('TicketOpen', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'title' => $vars['subject'],
-                'url' => $GLOBALS['whmcsAdminURL'] . 'supporttickets.php?action=view&id=' . $vars['ticketid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Support Ticket'
-                ),
-                'fields' => array(
-                    array(
-                        'name' => 'Priority',
-                        'value' => $vars['priority'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Department',
-                        'value' => $vars['deptname'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Ticket ID',
-                        'value' => $vars['ticketid'],
-                        'inline' => true
-                    )
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-add_hook('TicketUserReply', 1, function($vars)	{
-    $dataPacket     = array(
-        'content' => $GLOBALS['discordGroupID'],
-        'username' => $GLOBALS['companyName'],
-        'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-        'embeds' => array(
-            array(
-                'title' => $vars['subject'],
-                'url' => $GLOBALS['whmcsAdminURL'] . 'supporttickets.php?action=view&id=' . $vars['ticketid'],
-                'timestamp' => date(DateTime::ISO8601),
-                'description' => '',
-                'color' => '5653183',
-                'author' => array(
-                    'name' => 'New Ticket Reply'
-                ),
-                'fields' => array(
-                    array(
-                        'name' => 'Priority',
-                        'value' => $vars['priority'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Department',
-                        'value' => $vars['deptname'],
-                        'inline' => true
-                    ),
-                    array(
-                        'name' => 'Ticket ID',
-                        'value' => $vars['ticketid'],
-                        'inline' => true
-                    )
-                )
-            )
-        )
-    );
-    processNotification($dataPacket);
-});
-=======
-// Note: If you'd like to have a specific group pinged on each message, please place the ID here. An example of a group ID is: <@&343029528563548162>
 
 
 ////////////////////////// Notification Area //////////////////////////
@@ -318,6 +63,7 @@ if($invoicePaid === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Paid',
@@ -340,6 +86,7 @@ if($invoiceRefunded === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Refunded',
@@ -362,6 +109,7 @@ if($invoiceLateFee === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Had A Late Fee Added',
@@ -384,6 +132,7 @@ if($orderAccepted === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Order ' . $vars['orderid'] . ' Has Been Accepted',
@@ -406,6 +155,7 @@ if($orderCancelled === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Order ' . $vars['orderid'] . ' Has Been Cancelled',
@@ -428,6 +178,7 @@ if($orderCancelledRefunded === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Order ' . $vars['orderid'] . ' Has Been Cancelled & Refunded',
@@ -450,6 +201,7 @@ if($orderFraud === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'Order ' . $vars['orderid'] . ' Has Been Marked As Fraudulent',
@@ -472,6 +224,7 @@ if($networkIssueAdd === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A New Network Issue Has Been Created',
@@ -516,6 +269,7 @@ if($networkIssueEdit === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A Network Issue Has Been Edited',
@@ -560,6 +314,7 @@ if($networkIssueClosed === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A Network Issue Has Been Closed',
@@ -582,6 +337,7 @@ if($ticketOpened === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => '#' . $vars['ticketmask'] . ' - ' . simpleFix($vars['subject']),
@@ -621,6 +377,7 @@ if($ticketUserReply === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => simpleFix($vars['subject']),
@@ -655,6 +412,7 @@ if($ticketFlagged === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A ticket has been flagged to ' . $vars['adminname'],
@@ -677,6 +435,7 @@ if($ticketNewNote === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A Ticket Note Has Been Added',
@@ -699,6 +458,7 @@ if($cancellationRequest === true):
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
 					'title' => 'A Cancellation Request Has Been Received',
