@@ -309,7 +309,7 @@ $ticketFlagged = true; // Ticket Flagged To Staff Member Notification
 $ticketNewNote = true; // New Note Added To Ticket Notification
 
 // Miscellaneous Notifications
-$cancellationRequest - false; // New Cancellation Request Received Notification
+$cancellationRequest = false; // New Cancellation Request Received Notification
 
 ///////////////////////////////////////////////////////////////////////
 
