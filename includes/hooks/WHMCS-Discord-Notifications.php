@@ -1,11 +1,21 @@
 <?php
 
+///////////////////////// Provided For Free By /////////////////////////
+//                                                                    //
+//            PrimeNodes - Premium Infrastructure Provider            //
+//                William Phillips - MetallicGloss.com                //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////
 ////////////////////////// Configuration Area //////////////////////////
+///////////////////////////////////////////////////////////////////////
 // Configure the below variables to allow the script to work correct and connect to both your WHMCS install and Discord channel.
+// NOTE: Be careful to accidentily remove any of the " characters when copying and pasting details into the script.
 
-
-$GLOBALS['discordWebHookURL'] = "";
 // Your Discord WebHook URL.
+$GLOBALS['discordWebHookURL'] = "";
 // Note: Please be aware that the channel that you select when creating the web hook will be where the messages are sent.
 
 // Your WHMCS Admin URL.
@@ -24,38 +34,47 @@ $GLOBALS['discordColor'] = hexdec("");
 $GLOBALS['discordGroupID'] = "";
 // Note: If you'd like to have a specific group pinged on each message, please place the ID here. An example of a group ID is: <@&343029528563548162>
 
+// Discord Avatar Dynamic Image
 $GLOBALS['discordWebHookAvatar'] = "";
-// (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png).
+// (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png ).
 
 
+///////////////////////////////////////////////////////////////////////
 ////////////////////////// Notification Area //////////////////////////
-// Configure the below notification settings to meet the requirements of your team and what you wish to send to the Discord channel. 'true' = enabled, 'false' = disabled
-
-// Invoice Notifications
-$invoicePaid = false; // Invoice Paid Notification
-$invoiceRefunded = false; // Invoice Refunded Notification
-$invoiceLateFee = false; // Invoice Late Fee Notification
-
-// Order Notifications
-$orderAccepted = false; // Order Accepted Notification
-$orderCancelled = false; // Order Cancelled Notification
-$orderCancelledRefunded = false; // Order Cancelled & Refunded Notification
-$orderFraud = false; // Order Marked As Fraud Notification
-
-// Network Issue Notifications
-$networkIssueAdd = true; // New Network Issue Added Notification
-$networkIssueEdit = true; // Network Issue Edited Notification
-$networkIssueClosed = true; // Network Issue Closed Notification
+///////////////////////////////////////////////////////////////////////
+// Configure the below notification settings to meet the requirements of your team and what you wish to send to the Discord channel.
+// true = Notification enabled.
+// false = Notification disabled.
 
 // Ticket Notifications
-$ticketOpened = true; // New Ticket Opened Notification
-$ticketUserReply = true; // Ticket User Reply Received Notification
-$ticketFlagged = true; // Ticket Flagged To Staff Member Notification
-$ticketNewNote = true; // New Note Added To Ticket Notification
+$ticketOpened = true;               // New Ticket Opened Notification
+$ticketUserReply = true;            // Ticket User Reply Received Notification
+$ticketFlagged = true;              // Ticket Flagged To Staff Member Notification
+$ticketNewNote = true;              // New Note Added To Ticket Notification
+
+// Invoice Notifications
+$invoicePaid = false;               // Invoice Paid Notification
+$invoiceRefunded = false;           // Invoice Refunded Notification
+$invoiceLateFee = false;            // Invoice Late Fee Notification
+
+// Order Notifications
+$orderAccepted = false;             // Order Accepted Notification
+$orderCancelled = false;            // Order Cancelled Notification
+$orderCancelledRefunded = false;    // Order Cancelled & Refunded Notification
+$orderFraud = false;                // Order Marked As Fraud Notification
+
+// Network Issue Notifications
+$networkIssueAdd = true;            // New Network Issue Added Notification
+$networkIssueEdit = true;           // Network Issue Edited Notification
+$networkIssueClosed = true;         // Network Issue Closed Notification
 
 // Miscellaneous Notifications
-$cancellationRequest = false; // New Cancellation Request Received Notification
+$cancellationRequest = false;       // New Cancellation Request Received Notification
 
+
+
+///////////////////////////////////////////////////////////////////////
+////////  Don't edit below unless you know what you're doing.   ///////
 ///////////////////////////////////////////////////////////////////////
 
 if($invoicePaid === true):
