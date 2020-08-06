@@ -12,7 +12,7 @@
 ////////////////////////// Configuration Area //////////////////////////
 ///////////////////////////////////////////////////////////////////////
 // Configure the below variables to allow the script to work correct and connect to both your WHMCS install and Discord channel.
-// NOTE: Be careful to accidentily remove any of the " characters when copying and pasting details into the script.
+// NOTE: Be careful not to accidentily remove any of the " characters when copying and pasting details into the script.
 
 // Your Discord WebHook URL.
 $GLOBALS['discordWebHookURL'] = "";
