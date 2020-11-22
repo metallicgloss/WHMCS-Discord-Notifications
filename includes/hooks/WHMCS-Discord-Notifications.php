@@ -58,6 +58,8 @@ $invoiceRefunded = false;           // Invoice Refunded Notification
 $invoiceLateFee = false;            // Invoice Late Fee Notification
 
 // Order Notifications
+$pendingOrder = false;              // Order Set to Pending Notification
+$orderPaid = false;                 // Order Paid Notification
 $orderAccepted = false;             // Order Accepted Notification
 $orderCancelled = false;            // Order Cancelled Notification
 $orderCancelledRefunded = false;    // Order Cancelled & Refunded Notification
@@ -230,6 +232,52 @@ if($orderFraud === true):
 					'color' => $GLOBALS['discordColor'],
 					'author' => array(
 						'name' => 'Order Marked As Fraud'
+					)
+				)
+			)
+		);
+		processNotification($dataPacket);
+	});
+endif;
+
+if($orderPaid === true):
+	add_hook('OrderPaid', 1, function($vars)	{
+		$dataPacket = array(
+			'content' => $GLOBALS['discordGroupID'],
+			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
+			'embeds' => array(
+				array(
+					'title' => 'Order ' . $vars['orderid'] . ' Has Been Paid',
+					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
+					'timestamp' => date(DateTime::ISO8601),
+					'description' => '',
+					'color' => $GLOBALS['discordColor'],
+					'author' => array(
+						'name' => 'Order Has been Paid'
+					)
+				)
+			)
+		);
+		processNotification($dataPacket);
+	});
+endif;
+
+if($pendingOrder === true):
+	add_hook('PendingOrder', 1, function($vars)	{
+		$dataPacket = array(
+			'content' => $GLOBALS['discordGroupID'],
+			'username' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
+			'embeds' => array(
+				array(
+					'title' => 'Order ' . $vars['orderid'] . ' Has Been Set to Pending',
+					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
+					'timestamp' => date(DateTime::ISO8601),
+					'description' => '',
+					'color' => $GLOBALS['discordColor'],
+					'author' => array(
+						'name' => 'Order Was Marked as Pending'
 					)
 				)
 			)
