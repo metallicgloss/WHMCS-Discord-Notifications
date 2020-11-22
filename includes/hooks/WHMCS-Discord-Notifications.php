@@ -58,8 +58,8 @@ $invoiceRefunded = false;           // Invoice Refunded Notification
 $invoiceLateFee = false;            // Invoice Late Fee Notification
 
 // Order Notifications
-$pendingOrder = true;               // Order Set to Pending Notification
-$orderPaid = true;                  // Order Paid Notification
+$pendingOrder = false;              // Order Set to Pending Notification
+$orderPaid = false;                 // Order Paid Notification
 $orderAccepted = false;             // Order Accepted Notification
 $orderCancelled = false;            // Order Cancelled Notification
 $orderCancelledRefunded = false;    // Order Cancelled & Refunded Notification
