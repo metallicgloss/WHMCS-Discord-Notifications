@@ -35,6 +35,8 @@ PrimeNodes offers a range of high-performance **Intel Core** and **AMD Ryzen** b
 * Invoice Late Fee Added  
 
 ### Order Notifications
+* Order Marked as Pending
+* Order Paid
 * Order Accepted
 * Order Marked As Fraudulent
 * Order Cancelled
