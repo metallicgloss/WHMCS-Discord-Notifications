@@ -248,8 +248,8 @@ if($orderPaid === true):
 			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
-					'title' => 'Order ' . $vars['orderid'] . ' Has Been Paid',
-					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
+					'title' => 'Another Order Has Been Paid',
+					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php,
 					'timestamp' => date(DateTime::ISO8601),
 					'description' => '',
 					'color' => $GLOBALS['discordColor'],
