@@ -88,7 +88,6 @@ if($invoicePaid === true):
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
-			// Create a pretty embed showing the email of the user who paid as well as the amount of paid. Include each product in the order as an inline field
 			'embeds' => array(
 				array(
 					'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Paid',
