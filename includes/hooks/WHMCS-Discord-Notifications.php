@@ -81,10 +81,14 @@ $cancellationRequest = false;       // New Cancellation Request Received Notific
 
 if($invoicePaid === true):
 	add_hook('InvoicePaid', 1, function($vars)	{
+		$invoice = localAPI('GetInvoice', array('invoiceid' => $vars['invoiceid']), '');
+		$client = localAPI('GetClientsDetails', array('clientid' => $invoice['userid'], 'stats' => false), '');
+		
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
+			// Create a pretty embed showing the email of the user who paid as well as the amount of paid. Include each product in the order as an inline field
 			'embeds' => array(
 				array(
 					'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Paid',
@@ -94,6 +98,18 @@ if($invoicePaid === true):
 					'color' => $GLOBALS['discordColor'],
 					'author' => array(
 						'name' => 'Invoice Paid'
+					),
+					'fields' => array(
+						array(
+							'name' => 'User Email',
+							'value' => $client['email'],
+							'inline' => true
+						),
+						array(
+							'name' => 'Amount Paid',
+							'value' => '$' . $invoice['total'],
+							'inline' => true
+						)
 					)
 				)
 			)
@@ -242,19 +258,56 @@ endif;
 
 if($orderPaid === true):
 	add_hook('OrderPaid', 1, function($vars)	{
+		// Use the local api to get the order details
+		$postData = array(
+			'id' => $vars['orderId'],
+		);
+		$orders = localAPI('GetOrders', $postData, '');
+		$order = $orders['orders']['order'][0];
+		// Request information about the user who placed the order
+		$postData = array(
+			'clientid' => $order['userid'],
+		);
+		$clients = localAPI('GetClientsDetails', $postData, '');
+		$client = $clients['client'];
+		$productsOrder = $order['lineitems']['lineitem'];
+		$products = '';
+		// Loop through the line items creating a comma separated string of products
+		foreach($productsOrder as $product) {
+			$products .= $product['product'] . ', ';
+		}
+		// Remove the last comma
+		$products = substr($products, 0, -2);
 		$dataPacket = array(
 			'content' => $GLOBALS['discordGroupID'],
 			'username' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['discordWebHookAvatar'],
 			'embeds' => array(
 				array(
-					'title' => 'Order ' . $vars['orderid'] . ' Has Been Paid',
-					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderid'],
+					'title' => 'Order ' . $vars['orderId'] . ' Has Been Paid',
+					'url' => $GLOBALS['whmcsAdminURL'] . 'orders.php?action=view&id=' . $vars['orderId'],
 					'timestamp' => date(DateTime::ISO8601),
 					'description' => '',
 					'color' => $GLOBALS['discordColor'],
 					'author' => array(
-						'name' => 'Order Has been Paid'
+						'name' => 'Order Paid'
+					),
+					'fields' => array(
+						array(
+							'name' => 'User Email',
+							'value' => $client['email'],
+							'inline' => true
+						),
+						array(
+							'name' => 'Amount Paid',
+							'value' => '$' . $order['amount'],
+							'inline' => true
+						),
+						array(
+							'name' => 'Products',
+							'value' => $products,
+							'inline' => false
+						)
 					)
 				)
 			)
