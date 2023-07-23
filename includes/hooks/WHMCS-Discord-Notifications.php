@@ -579,7 +579,7 @@ function simpleFix($value){
 		$valueTrim = explode( "\n", wordwrap( $value, 150));
 		$value = $valueTrim[0] . '...';
 	}
-	$value = mb_convert_encoding($value, "UTF-8", "HTML-ENTITIES"); // Allows special characters to be displayed on Discord.
+	$value = iconv(mb_detect_encoding($value, mb_detect_order(), true), 'UTF-8', $value); // Allows special characters to be displayed on Discord.
 	return $value;
 }
 
