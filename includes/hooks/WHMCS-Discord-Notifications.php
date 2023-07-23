@@ -2,8 +2,8 @@
 
 ///////////////////////// Provided For Free By /////////////////////////
 //                                                                    //
-//            PrimeNodes - Premium Infrastructure Provider            //
-//                William Phillips - MetallicGloss.com                //
+//              Zare - Affordable DDoS Protected Servers              //
+//                   William P - MetallicGloss.com                    //
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
@@ -37,6 +37,11 @@ $GLOBALS['discordGroupID'] = "";
 // Discord Avatar Dynamic Image
 $GLOBALS['discordWebHookAvatar'] = "";
 // (OPTIONAL SETTING) Your desired Webhook Avatar. Please make sure you enter a direct link to the image (E.G. https://example.com/iownpaypal.png ).
+
+// Sensitive Information Display
+$GLOBALS['sensitiveInformation'] = False; // False/True
+// Note: Disabled by default; if enabled, customer emails will be included in some notifications.
+// WARNING: Sharing/storing personally identifable information on Discord will require the update of your privacy policy (if applicable) to allow you to remain in compliance with GDPR.
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -101,7 +106,7 @@ if($invoicePaid === true):
 					'fields' => array(
 						array(
 							'name' => 'User Email',
-							'value' => $client['email'],
+							'value' => ($GLOBALS['sensitiveInformation'] ? $client['email'] : "-- Redacted --"),
 							'inline' => true
 						),
 						array(
@@ -294,7 +299,7 @@ if($orderPaid === true):
 					'fields' => array(
 						array(
 							'name' => 'User Email',
-							'value' => $client['email'],
+							'value' => ($GLOBALS['sensitiveInformation'] ? $client['email'] : "-- Redacted --"),
 							'inline' => true
 						),
 						array(
